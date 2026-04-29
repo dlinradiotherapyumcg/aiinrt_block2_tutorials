@@ -140,23 +140,23 @@ def _window_limits(level, width):
     return level - (width / 2.0), level + (width / 2.0)
 
 
-def load_experiment2_data(metal_exp, nib):
+def load_experiment2_data(metal_exp, nib, remove_slices=0):
     """Load Experiment 2 data and predictions for staged discovery workflow."""
-    metal_img = nib.load(str(metal_exp["metal_case_image"])).get_fdata()
-    no_metal_img = nib.load(str(metal_exp["no_metal_case_image"])).get_fdata()
+    metal_img = nib.load(str(metal_exp["metal_case_image"])).get_fdata()[:, :, remove_slices:-remove_slices]
+    no_metal_img = nib.load(str(metal_exp["no_metal_case_image"])).get_fdata()[:, :, remove_slices:-remove_slices]
 
     pred_model_a_case1 = (
-        nib.load(str(metal_exp["no_metal_model_pred_metal"])).get_fdata()
+        nib.load(str(metal_exp["no_metal_model_pred_metal"])).get_fdata()[:, :, remove_slices:-remove_slices]
         if Path(metal_exp["no_metal_model_pred_metal"]).exists()
         else None
     )
     pred_model_a_case2 = (
-        nib.load(str(metal_exp["no_metal_model_pred_no_metal"])).get_fdata()
+        nib.load(str(metal_exp["no_metal_model_pred_no_metal"])).get_fdata()[:, :, remove_slices:-remove_slices]
         if Path(metal_exp["no_metal_model_pred_no_metal"]).exists()
         else None
     )
 
-    pred_model_b_case1 = nib.load(str(metal_exp["metal_model_pred_metal"])).get_fdata()
+    pred_model_b_case1 = nib.load(str(metal_exp["metal_model_pred_metal"])).get_fdata()[:, :, remove_slices:-remove_slices]
     pred_model_b_case2 = (
         nib.load(str(metal_exp["metal_model_pred_no_metal"])).get_fdata()
         if Path(metal_exp["metal_model_pred_no_metal"]).exists()
@@ -164,12 +164,12 @@ def load_experiment2_data(metal_exp, nib):
     )
 
     gt_case1 = (
-        nib.load(str(metal_exp["gt_metal"])).get_fdata()
+        nib.load(str(metal_exp["gt_metal"])).get_fdata()[:, :, remove_slices:-remove_slices]
         if metal_exp.get("gt_metal") and Path(metal_exp["gt_metal"]).exists()
         else None
     )
     gt_case2 = (
-        nib.load(str(metal_exp["gt_no_metal"])).get_fdata()
+        nib.load(str(metal_exp["gt_no_metal"])).get_fdata()[:, :, remove_slices:-remove_slices]
         if metal_exp.get("gt_no_metal") and Path(metal_exp["gt_no_metal"]).exists()
         else None
     )

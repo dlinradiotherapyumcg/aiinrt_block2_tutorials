@@ -1,7 +1,7 @@
 from pathlib import Path
 
-BASE = Path(r"C:\Users\AalstJE\OneDrive - UMCG\Documents\PhD\Code\AIOS-course\Data\processed")
-
+#BASE = Path(r"\\zkh\appdata\RTDicom\Projectline_HNC_modelling\Users\Daniel MacRae\7. Supervising and Education\AIOS_AIinRT\AIinRT_block2_tutorials\data")
+BASE = Path(r"/content/drive/MyDrive/AIinRT_block2_tutorials/data")
 # Experiment 1: post-surgery case (model not trained on operated anatomy)
 SURGERY_EXP = {
     "postop_image": BASE / "surgery_experiment" / "imagesTs" / "HNC-B_782_0000.nii.gz",

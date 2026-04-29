@@ -19,7 +19,7 @@ def plot_example_data(X_data, y_data, title="Example Data"):
             ax.imshow(img, cmap="gray_r", interpolation="nearest")
             ax.axis("off")
             if row == 0:
-                ax.set_title(str(digit), fontsize=14, fontweight="bold")
+                ax.set_title(str(digit), fontsize=20, fontweight="bold")
 
     plt.tight_layout()
     plt.show()
